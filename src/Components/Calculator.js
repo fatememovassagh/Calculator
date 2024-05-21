@@ -120,39 +120,45 @@ function resultReducer(state, {type, payload}) {
             return state;
 
     }
-
     function evaluate({operation, previousOperand, currentOperand}) {
-        console.log('operation,previousOperand ,currentOperand', operation, previousOperand, currentOperand)
-        const prev = parseFloat(previousOperand)
-        const curr = parseFloat(currentOperand)
-        let computation
+        const prev = parseFloat(previousOperand);
+        const curr = parseFloat(currentOperand);
+        let computation;
         switch (operation) {
             case '+':
-                computation = prev + curr
-                break
+                computation = prev + curr;
+                break;
             case '-':
-                computation = prev - curr
-                break
+                computation = prev - curr;
+                break;
             case '*':
-                computation = prev * curr
-                break
+                computation = prev * curr;
+                break;
             case '÷':
-                // Prevent resulting Error
                 if (curr === 0) {
-                    computation = null
-                    break
+                    computation = null;
+                    break;
                 }
-                computation = prev / curr
-                break
-            default :
-                return computation = null;
+                computation = prev / curr;
+                break;
+            default:
+                return null;
         }
-        // Shrink the length of a number by using exponential function (for numbers with more than 7 digits)
-        if (computation?.toString().length > 7) {
-            computation = computation?.toExponential(2)
+
+        // Format the number to avoid floating-point issues
+        function formatNumber(num) {
+            num = parseFloat(num.toFixed(10));
+            let numStr = num.toString();
+            if (numStr.length > 11) {
+                return num.toExponential(5);
+            } else {
+                return numStr;
+            }
         }
-        return computation?.toString()
+
+        return formatNumber(computation);
     }
+
 }
 
 const Calculator = (props) => {
