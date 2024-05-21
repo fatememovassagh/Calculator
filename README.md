@@ -1,5 +1,7 @@
 # Simple Calculator Project
 
+### [Calculator Demo](https://my-calculator-online.netlify.app/)
+
 This React project is a simple calculator application enhanced with a dark and light mode toggle feature, styled using the Tailwind CSS library.
 
 ## Features
